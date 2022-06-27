@@ -5,7 +5,6 @@ SET(CMAKE_CXX_STANDARD 17)
 
 SET(CXX_FLAGS
   -std=c++17
-  -g
   -Wall
   -O3
 )
