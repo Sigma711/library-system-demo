@@ -21,11 +21,11 @@ Item::Item(unsigned long long number, const std::string& title,
 Item::~Item() {}
 
 std::string Item::GetInfoStr() const {
-  int str_len = ::snprintf(nullptr, static_cast<size_t>(0),
-                           "%llu\t%s\t%s\t%s\ts", number_, title_.c_str(),
-                           author_.c_str(), GetRateStr(rate_).c_str());
+  int str_len =
+      ::snprintf(nullptr, static_cast<size_t>(0), "%llu\t%s\t%s\t%s\t", number_,
+                 title_.c_str(), author_.c_str(), GetRateStr(rate_).c_str());
   char* new_str = new char[static_cast<size_t>(str_len)];
-  ::snprintf(new_str, static_cast<size_t>(str_len), "%lld\t%s\t%s\t%s\t",
+  ::snprintf(new_str, static_cast<size_t>(str_len), "%llu\t%s\t%s\t%s\t",
              number_, title_.c_str(), author_.c_str(),
              GetRateStr(rate_).c_str());
   std::string info_str{new_str};

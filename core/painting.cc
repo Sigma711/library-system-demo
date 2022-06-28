@@ -22,11 +22,11 @@ Painting::Painting(
 std::string Painting::GetInfoStr() const {
   std::string main_str{Item::GetInfoStr()};
   int extra_str_len =
-      ::snprintf(nullptr, static_cast<size_t>(0), "%s\t(%u, %u)",
+      ::snprintf(nullptr, static_cast<size_t>(0), "%s\t%hu,%hu",
                  nationality_of_producing_.c_str(), length_and_width_.first,
                  length_and_width_.second);
   char* new_extra_str = new char[static_cast<size_t>(extra_str_len)];
-  ::snprintf(new_extra_str, static_cast<size_t>(extra_str_len), "%s\t(%u, %u)",
+  ::snprintf(new_extra_str, static_cast<size_t>(extra_str_len), "%s\t%hu,%hu",
              nationality_of_producing_.c_str(), length_and_width_.first,
              length_and_width_.second);
   std::string extra_str{new_extra_str};

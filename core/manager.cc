@@ -22,6 +22,9 @@ Manager* Manager::GetManager() {
 }
 
 void Manager::Execute() {
+  if (::system("clear") != 0) {
+    ::exit(-1);
+  }
   bool should_quit = false;
   while (!should_quit) {
     ::printf(
@@ -64,13 +67,13 @@ void Manager::ExecuteForUsers() {
     ::printf("Please input user's name:\n");
     char nm[100];
     name = ::fgets(nm, 100, stdin);
-    name.substr(name.size() - 1);
+    name.substr(0, name.size() - 1);
     bool is_new = true;
     if (user_passwords_.count(name) != 0) {
       is_new = false;
     }
     ::printf("Please input user's 4-digit password:\n");
-    char passwd[5];
+    char passwd[100];
     if (::scanf("%s", passwd) == EOF) {
       ::exit(-1);
     }
@@ -263,6 +266,8 @@ void Manager::BrowseItemsByAType(const std::string& user_name) const {
   for (const auto& item : items[2]) {
     ::printf("%s\n", item->GetInfoStr().c_str());
   }
+  ::printf("\nYou can press any key to return.\n");
+  ::getchar();
 }
 
 void Manager::BorrowAnItem(const std::string& user_name) {
@@ -356,9 +361,9 @@ void Manager::AddAnItem() {
         }
       }
       title = ::fgets(ttl, 100, stdin);
-      title = title.substr(title.size() - 1);
+      title = title.substr(0, title.size() - 1);
       author = ::fgets(atr, 100, stdin);
-      author = author.substr(author.size() - 1);
+      author = author.substr(0, author.size() - 1);
       if (::scanf("%d", &rt) == EOF) {
         ::exit(-1);
       }
@@ -366,10 +371,11 @@ void Manager::AddAnItem() {
       rate = GetRate(rt);
       char ph[100];
       publishing_house = ::fgets(ph, 100, stdin);
-      publishing_house = publishing_house.substr(publishing_house.size() - 1);
+      publishing_house =
+          publishing_house.substr(0, publishing_house.size() - 1);
       char in[100];
       isbn_number = ::fgets(in, 100, stdin);
-      isbn_number = isbn_number.substr(isbn_number.size() - 1);
+      isbn_number = isbn_number.substr(0, isbn_number.size() - 1);
       unsigned int number_of_pages;
       if (::scanf("%u", &number_of_pages) == EOF) {
         ::exit(-1);
@@ -399,9 +405,9 @@ void Manager::AddAnItem() {
         }
       }
       title = ::fgets(ttl, 100, stdin);
-      title = title.substr(title.size() - 1);
+      title = title.substr(0, title.size() - 1);
       author = ::fgets(atr, 100, stdin);
-      author = author.substr(author.size() - 1);
+      author = author.substr(0, author.size() - 1);
       if (::scanf("%d", &rt) == EOF) {
         ::exit(-1);
       }
@@ -409,7 +415,7 @@ void Manager::AddAnItem() {
       rate = GetRate(rt);
       char pd[100];
       producer = ::fgets(pd, 100, stdin);
-      producer = producer.substr(producer.size() - 1);
+      producer = producer.substr(0, producer.size() - 1);
       unsigned short year_of_producing;
       if (::scanf("%hu", &year_of_producing) == EOF) {
         ::exit(-1);
@@ -427,7 +433,7 @@ void Manager::AddAnItem() {
     case 3:
       ::printf(
           "Please input Order Number, Title, Author, Rate, Nationality of "
-          "Producing and [Length and Width]:\n(Each entry should use single "
+          "Producing, Length and Width:\n(Each entry should use single "
           "one line)\n");
       if (::scanf("%llu", &number) == EOF) {
         ::exit(-1);
@@ -443,9 +449,9 @@ void Manager::AddAnItem() {
         }
       }
       title = ::fgets(ttl, 100, stdin);
-      title = title.substr(title.size() - 1);
+      title = title.substr(0, title.size() - 1);
       author = ::fgets(atr, 100, stdin);
-      author = author.substr(author.size() - 1);
+      author = author.substr(0, author.size() - 1);
       if (::scanf("%d", &rt) == EOF) {
         ::exit(-1);
       }
@@ -453,8 +459,8 @@ void Manager::AddAnItem() {
       rate = GetRate(rt);
       char nop[100];
       nationality_of_producing = ::fgets(nop, 100, stdin);
-      nationality_of_producing =
-          nationality_of_producing.substr(nationality_of_producing.size() - 1);
+      nationality_of_producing = nationality_of_producing.substr(
+          0, nationality_of_producing.size() - 1);
       unsigned short lgt;
       if (::scanf("%hu", &lgt) == EOF) {
         ::exit(-1);
