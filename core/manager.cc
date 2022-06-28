@@ -32,6 +32,7 @@ void Manager::Execute() {
     if (::scanf("%u", &operation_option) == EOF) {
       ::exit(-1);
     }
+    ::getchar();
     if (::system("clear") != 0) {
       ::exit(-1);
     }
@@ -63,6 +64,7 @@ void Manager::ExecuteForUsers() {
     ::printf("Please input user's name:\n");
     char nm[100];
     name = ::fgets(nm, 100, stdin);
+    name.substr(name.size() - 1);
     bool is_new = true;
     if (user_passwords_.count(name) != 0) {
       is_new = false;
@@ -72,6 +74,7 @@ void Manager::ExecuteForUsers() {
     if (::scanf("%s", passwd) == EOF) {
       ::exit(-1);
     }
+    ::getchar();
     passwd[4] = '\0';
     std::string password{passwd};
     if (is_new) {
@@ -101,6 +104,7 @@ void Manager::ExecuteForUsers() {
     if (::scanf("%u", &operation_option) == EOF) {
       ::exit(-1);
     }
+    ::getchar();
     if (::system("clear") != 0) {
       ::exit(-1);
     }
@@ -139,6 +143,7 @@ void Manager::ExecuteForAdmins() {
     if (::scanf("%s", passwd) == EOF) {
       ::exit(-1);
     }
+    ::getchar();
     passwd[4] = '\0';
     std::string password{passwd};
     if (PASSWORD != password) {
@@ -162,6 +167,7 @@ void Manager::ExecuteForAdmins() {
     if (::scanf("%u", &operation_option) == EOF) {
       ::exit(-1);
     }
+    ::getchar();
     if (::system("clear") != 0) {
       ::exit(-1);
     }
@@ -265,6 +271,7 @@ void Manager::BorrowAnItem(const std::string& user_name) {
   if (::scanf("%llu", &number) == EOF) {
     ::exit(-1);
   }
+  ::getchar();
   for (auto& indexer : indexers_) {
     if (indexer.count(number) != 0 && !indexer.at(number)->IsBorrowed()) {
       indexer.at(number)->SetBorrowedFlag(true);
@@ -281,6 +288,7 @@ void Manager::ReturnAnItem(const std::string& user_name) {
   if (::scanf("%llu", &number) == EOF) {
     ::exit(-1);
   }
+  ::getchar();
   for (auto& indexer : indexers_) {
     if (indexer.count(number) != 0 &&
         user_items_.at(user_name).count(number) != 0) {
@@ -301,6 +309,7 @@ void Manager::AddAnItem() {
   if (::scanf("%u", &operation_option) == EOF) {
     ::exit(-1);
   }
+  ::getchar();
   if (::system("clear") != 0) {
     ::exit(-1);
   }
@@ -336,6 +345,7 @@ void Manager::AddAnItem() {
       if (::scanf("%llu", &number) == EOF) {
         ::exit(-1);
       }
+      ::getchar();
       for (const auto& indexer : indexers_) {
         if (indexer.count(number) != 0) {
           ::printf(
@@ -346,19 +356,25 @@ void Manager::AddAnItem() {
         }
       }
       title = ::fgets(ttl, 100, stdin);
+      title = title.substr(title.size() - 1);
       author = ::fgets(atr, 100, stdin);
+      author = author.substr(author.size() - 1);
       if (::scanf("%d", &rt) == EOF) {
         ::exit(-1);
       }
+      ::getchar();
       rate = GetRate(rt);
       char ph[100];
       publishing_house = ::fgets(ph, 100, stdin);
+      publishing_house = publishing_house.substr(publishing_house.size() - 1);
       char in[100];
       isbn_number = ::fgets(in, 100, stdin);
+      isbn_number = isbn_number.substr(isbn_number.size() - 1);
       unsigned int number_of_pages;
       if (::scanf("%u", &number_of_pages) == EOF) {
         ::exit(-1);
       }
+      ::getchar();
       indexers_[0].insert(
           {number,
            std::make_shared<Book>(number, title, author, rate, publishing_house,
@@ -372,6 +388,7 @@ void Manager::AddAnItem() {
       if (::scanf("%llu", &number) == EOF) {
         ::exit(-1);
       }
+      ::getchar();
       for (const auto& indexer : indexers_) {
         if (indexer.count(number) != 0) {
           ::printf(
@@ -382,21 +399,27 @@ void Manager::AddAnItem() {
         }
       }
       title = ::fgets(ttl, 100, stdin);
+      title = title.substr(title.size() - 1);
       author = ::fgets(atr, 100, stdin);
+      author = author.substr(author.size() - 1);
       if (::scanf("%d", &rt) == EOF) {
         ::exit(-1);
       }
+      ::getchar();
       rate = GetRate(rt);
       char pd[100];
       producer = ::fgets(pd, 100, stdin);
+      producer = producer.substr(producer.size() - 1);
       unsigned short year_of_producing;
       if (::scanf("%hu", &year_of_producing) == EOF) {
         ::exit(-1);
       }
+      ::getchar();
       unsigned long length_of_video;
       if (::scanf("%lu", &length_of_video) == EOF) {
         ::exit(-1);
       }
+      ::getchar();
       indexers_[1].insert({number, std::make_shared<VideoCd>(
                                        number, title, author, rate, producer,
                                        year_of_producing, length_of_video)});
@@ -409,6 +432,7 @@ void Manager::AddAnItem() {
       if (::scanf("%llu", &number) == EOF) {
         ::exit(-1);
       }
+      ::getchar();
       for (const auto& indexer : indexers_) {
         if (indexer.count(number) != 0) {
           ::printf(
@@ -419,21 +443,28 @@ void Manager::AddAnItem() {
         }
       }
       title = ::fgets(ttl, 100, stdin);
+      title = title.substr(title.size() - 1);
       author = ::fgets(atr, 100, stdin);
+      author = author.substr(author.size() - 1);
       if (::scanf("%d", &rt) == EOF) {
         ::exit(-1);
       }
+      ::getchar();
       rate = GetRate(rt);
       char nop[100];
       nationality_of_producing = ::fgets(nop, 100, stdin);
+      nationality_of_producing =
+          nationality_of_producing.substr(nationality_of_producing.size() - 1);
       unsigned short lgt;
       if (::scanf("%hu", &lgt) == EOF) {
         ::exit(-1);
       }
+      ::getchar();
       unsigned short wdt;
       if (::scanf("%hu", &wdt) == EOF) {
         ::exit(-1);
       }
+      ::getchar();
       indexers_[2].insert(
           {number, std::make_shared<Painting>(
                        number, title, author, rate, nationality_of_producing,
@@ -447,10 +478,12 @@ void Manager::AddAnItem() {
   }
 }
 void Manager::DeleteAnItem() {
+  ::printf("Input the order number of the item you want to delete:\n");
   unsigned long long order_number;
   if (::scanf("%llu", &order_number) == EOF) {
     ::exit(-1);
   }
+  ::getchar();
   for (auto& indexer : indexers_) {
     if (indexer.count(order_number) != 0) {
       if (indexer.at(order_number)->IsBorrowed()) {
