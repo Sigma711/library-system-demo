@@ -21,7 +21,7 @@
 #define START_THE_LIBRARY_SYSTEM()          \
   do {                                      \
     core::Manager::GetManager()->Execute(); \
-  } while (false);
+  } while (false)
 
 namespace core {
 
@@ -36,6 +36,8 @@ class Manager : NonCopyableMovable {
   void Execute();
 
  private:
+  Manager() = default;
+
   typedef std::map<unsigned long long, std::shared_ptr<Item>> Indexer;
   typedef std::array<Indexer, 3> Indexers;
   typedef std::unordered_map<std::string, std::string> UserPasswords;
